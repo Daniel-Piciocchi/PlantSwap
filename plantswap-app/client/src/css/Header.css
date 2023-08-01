@@ -1,0 +1,21 @@
+/* src/css/Header.css */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: #f0f8ff;
+    color: #006400;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.header nav a {
+    margin-left: 10px;
+    color: #006400;
+    text-decoration: none;
+    font-size: 1.0em;
+}
+
+.header nav a:hover {
+    color: #004d00;
+}

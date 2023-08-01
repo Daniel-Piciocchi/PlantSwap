@@ -1,0 +1,66 @@
+/* src/css/LoginRegister.css */
+
+.login-register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 50px;
+    background-color: #f0f8ff;
+    color: #006400;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.login-register h1, .login-register h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.login-register label {
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 10px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.login-register input[type="text"],
+.login-register input[type="email"],
+.login-register input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Add this style to center the input boxes */
+.login-register .register-form, .login-register .login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-register button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #006400;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-register button:hover {
+    background-color: #004d00;
+}
+
+.login-register .register-form, .login-register .login-form {
+    margin-bottom: 50px;
+    padding: 20px;
+}

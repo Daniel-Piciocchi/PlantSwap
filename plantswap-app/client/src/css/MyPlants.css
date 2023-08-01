@@ -1,0 +1,65 @@
+/* src/css/MyPlants.css */
+
+.myPlants {
+    text-align: center;
+    padding: 50px;
+    background-color: #f0f8ff;
+    color: #006400;
+    font-family: 'Courier New', Courier, monospace;
+}
+  
+.myPlants h1 {
+    font-size: 2.5em;
+}
+  
+.myPlants p {
+    font-size: 1.2em;
+}
+  
+.myPlants button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    margin-right: 10px; /* Add a small gap between the buttons */
+    font-size: 1em;
+    color: #fff;
+    background-color: #006400;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+  
+.myPlants button:hover {
+    background-color: #004d00;
+}
+  
+.myPlants h2 {
+    margin-top: 100px; /* Increase top margin */
+    font-size: 2em;
+}
+  
+.myPlants ol {
+    list-style-position: inside;
+    font-size: 1.2em;
+}
+
+.myPlants ol li {
+    margin-bottom: 10px;
+}
+
+/* Add the CSS for the plant grid and individual plant listings */
+
+.myPlants .plant-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Add some gap between the plant listings */
+}
+
+.myPlants .plant-listing {
+    width: 200px; /* Adjust as needed */
+    border: 1px solid #006400;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
