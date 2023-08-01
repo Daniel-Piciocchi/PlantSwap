@@ -6,15 +6,15 @@
     color: #006400;
     font-family: 'Courier New', Courier, monospace;
 }
-  
+
 .browse-plants h1 {
     font-size: 2.5em;
 }
-  
+
 .browse-plants p {
     font-size: 1.2em;
 }
-  
+
 .browse-plants button {
     padding: 10px 20px;
     margin-top: 20px;
@@ -24,18 +24,19 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin: 20px;
 }
-  
+
 .browse-plants button:hover {
     background-color: #004d00;
 }
-  
+
 .browse-plants h2 {
     margin-top: 100px; /* Increase top margin */
     margin-bottom: 50px;
     font-size: 2em;
 }
-  
+
 .browse-plants ol {
     list-style-position: inside;
     font-size: 1.2em;
@@ -49,4 +50,5 @@
     display: grid; /* Use CSS Grid for layout */
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Create a responsive grid with a minimum column width of 200px */
     gap: 20px; /* Add some space between grid items */
+    padding: 20px; /* Add padding to the grid */
 }

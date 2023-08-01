@@ -12,20 +12,21 @@ const plants = [
 ];
 
 const BrowsePlantsPage = () => (
-  <main className="browse-plants"> {/* Add the CSS class */}
-    <h1>Browse Plants</h1>
-    <h2>Plant Listings</h2>
-    <div className="plant-grid"> {/* Add a CSS class for the plant grid */}
-      {plants.map((plant) => (
-        <div className="plant-listing" key={plant.id}> {/* Add a CSS class for individual plant listings */}
-          <img src={plant.image} alt={plant.name} />
-          <h3>{plant.name}</h3>
-          <p>{plant.latinName}</p>
-          <p>{plant.description}</p>
-        </div>
-      ))}
-    </div>
-  </main>
-);
-
-export default BrowsePlantsPage;
+    <main className="browse-plants">
+      <h1>Browse Plants</h1>
+      <h2>Plant Listings</h2>
+      <div className="plant-grid">
+        {plants.map((plant) => (
+          <div className="plant-listing" key={plant.id}>
+            <img src={plant.image} alt={plant.name} />
+            <h3>{plant.name}</h3>
+            <p>{plant.latinName}</p>
+            <p>{plant.description}</p>
+            <button className="request-swap-button">Request Swap</button> {/* Add the Request Swap button */}
+          </div>
+        ))}
+      </div>
+    </main>
+  );
+  
+  export default BrowsePlantsPage;
