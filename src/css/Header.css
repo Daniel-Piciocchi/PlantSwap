@@ -1,0 +1,62 @@
+/* src/css/Header.css */
+.header {
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    padding: 20px 10%; /* Adjust the right padding */
+    background-color: #f0f8ff;
+    color: #006400;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.header nav a {
+    margin-left: 10px;
+    color: #006400;
+    text-decoration: none;
+    font-size: 1.0em;
+}
+
+.header nav a:hover {
+    color: #004d00;
+}
+
+.hamburger-menu, .close-btn {
+    background: none;
+    border: none;
+    color: #006400;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.hide {
+    display: none;
+}
+
+.nav {
+    position: absolute;
+    top: 20px; /* Adjust this value as needed */
+    right: 110px; /* Adjust this value as needed */
+    display: none;
+    flex-direction: column;
+    align-items: flex-end;
+    background-color: #f0f8ff; /* Add a background color to make the links visible */
+    padding: 10px; /* Add some padding */
+}
+
+
+.nav.open {
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (min-width: 768px) {
+    .hamburger-menu, .close-btn {
+        display: none;
+    }
+
+    .nav {
+        display: flex;
+        flex-direction: row;
+        align-items: center; /* Reset the alignment of the navigation menu for larger screens */
+    }
+}
