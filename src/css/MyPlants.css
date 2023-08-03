@@ -23,15 +23,11 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin: 5px 0; /* Add margin */
-}
-
-.myPlants button:hover {
-    background-color: #004d00;
+    margin: 5px 10px;
 }
 
 .myPlants h2 {
-    margin-top: 100px; /* Increase top margin */
+    margin-top: 100px;
     font-size: 2em;
 }
 
@@ -58,6 +54,9 @@
     border-radius: 10px;
     padding: 10px;
     background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .myPlants .plant-listing img {
@@ -67,12 +66,9 @@
     border-radius: 10px;
 }
 
-.myPlants .plant-listing h3 {
-    margin-top: 10px;
-}
-
-.myPlants .plant-listing p {
-    margin-top: 5px;
+.myPlants .plant-listing h3, .myPlants .plant-listing p, .myPlants .plant-listing .plant-buttons {
+    text-align: center;
+    width: 100%;
 }
 
 .myPlants .plant-listing .plant-buttons {
@@ -81,59 +77,16 @@
     margin-top: 10px;
 }
 
-.myPlants .plant-requests {
+.myPlants .add-plant {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 50px;
-}
-
-.myPlants .plant-request {
-    width: 200px;
-    border: 1px solid #006400;
-    border-radius: 10px;
-    padding: 10px;
-    background-color: #fff;
-    position: relative;
-}
-
-.myPlants .plant-request .plant-image {
-    position: relative;
-}
-
-.myPlants .plant-request .plant-image img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-.myPlants .plant-request .plant-image .plant-description {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    gap: 10px;
+    width: 50%; /* Adjust this value as needed */
+    margin: 0 auto; /* Center the form horizontally */
 }
 
-.myPlants .plant-request .plant-image .plant-description.active {
-    opacity: 1;
-}
-
-.myPlants .plant-request .plant-request-info {
-    margin-top: 10px;
-}
-
-.myPlants .plant-request .plant-buttons {
-    display: flex;
-    justify-content: space-evenly;
+.myPlants .add-plant input, .myPlants .add-plant textarea, .myPlants .add-plant button {
+    /* width: 100%; */
     margin-top: 10px;
 }

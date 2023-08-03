@@ -1,69 +1,76 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import request from 'superagent';
 import '../css/MyPlants.css'; // Import the CSS
 
-const plants = [
-  { id: 1, image: '/arecaceae-plant.png', name: 'Plant 1', description: 'Description 1' },
-  { id: 2, image: 'plant2.jpg', name: 'Plant 2', description: 'Description 2' },
-  { id: 3, image: 'plant3.jpg', name: 'Plant 3', description: 'Description 3' },
-  { id: 4, image: 'plant4.jpg', name: 'Plant 4', description: 'Description 4' },
-  { id: 5, image: 'plant5.jpg', name: 'Plant 5', description: 'Description 5' },
-  { id: 6, image: 'plant6.jpg', name: 'Plant 6', description: 'Description 6' },
-];
-
-const plantRequests = [
-  { id: 1, plantId: 1, requester: 'John Doe', message: 'I would like to swap my plant for yours.', image: '/arecaceae-plant.png', description: 'Description for Request 1' },
-  { id: 2, plantId: 2, requester: 'Jane Smith', message: 'Your plant looks amazing! Would you like to trade?', image: 'request2.jpg', description: 'Description for Request 2' },
-  { id: 3, plantId: 3, requester: 'Mike Johnson', message: 'I am interested in your beautiful plant. Lets trade!', image: 'request3.jpg', description: 'Description for Request 3' },
-  // Add more plant requests as needed
-];
-
 const MyPlantsPage = () => {
-  const [isHovered, setIsHovered] = useState(
-    plantRequests.reduce((acc, request) => ({ ...acc, [request.id]: false }), {})
-  );
+  const [plants, setPlants] = useState([]);
+  const [newPlant, setNewPlant] = useState({ name: '', image: '', description: '' });
+
+  useEffect(() => {
+    const fetchPlants = async () => {
+      const response = await request.get('http://localhost:5001/plants');
+      setPlants(response.body);
+    };
+    fetchPlants();
+  }, [plants]);
+
+  const handleDelete = async (id) => {
+    await request.delete(`http://localhost:5001/plants/${id}`);
+    setPlants(plants.filter((plant) => plant._id !== id));
+  };
+
+  const handleAdd = async () => {
+    const formData = new FormData();
+    formData.append('image', newPlant.image);
+    formData.append('name', newPlant.name);
+    formData.append('description', newPlant.description);
+    const response = await request.post('http://localhost:5001/plants').send(formData);
+    console.log('Server response:', response); // Log the entire server response
+    console.log('Response data:', response.body); // Log the response data
+    setPlants([...plants, response.body]);
+    setNewPlant({ name: '', image: '', description: '' });
+    console.log('Plants after adding:', plants); // Log the plants state after adding a plant
+  };
+
+  const handleImageUpload = (event) => {
+    setNewPlant({ ...newPlant, image: event.target.files[0] });
+  };
 
   return (
     <main className="myPlants">
       <h1>My Plant Listings</h1>
       <div className="plant-grid">
         {plants.map((plant) => (
-          <div className="plant-listing" key={plant.id}>
-            <img src={plant.image} alt={plant.name} />
+          <div className="plant-listing" key={plant._id}>
+            <img src={`/uploads/${plant.image}`} alt={plant.name} /> 
             <h3>{plant.name}</h3>
             <p>{plant.description}</p>
             <div className="plant-buttons">
               <button>Edit</button>
-              <button>Delete</button>
+              <button onClick={() => handleDelete(plant._id)}>Delete</button>
             </div>
           </div>
         ))}
       </div>
 
-      <h2>Plant Requests</h2>
-      <div className="plant-requests">
-        {plantRequests.map((request) => (
-          <div
-            className="plant-request"
-            key={request.id}
-            onMouseEnter={() => setIsHovered({ ...isHovered, [request.id]: true })}
-            onMouseLeave={() => setIsHovered({ ...isHovered, [request.id]: false })}
-          >
-            <div className="plant-image">
-              <img src={request.image} alt={`Plant ${request.plantId}`} />
-              <div className={`plant-description ${isHovered[request.id] ? 'active' : ''}`}>
-                <p>{request.description}</p>
-              </div>
-            </div>
-            <div className="plant-request-info">
-              <p>Requester: {request.requester}</p>
-              <p>Message: {request.message}</p>
-            </div>
-            <div className="plant-buttons">
-              <button>Accept</button>
-              <button>Reject</button>
-            </div>
-          </div>
-        ))}
+      <h2>Add a New Plant</h2>
+      <div className="add-plant">
+        <input
+          type="text"
+          placeholder="Plant name"
+          value={newPlant.name}
+          onChange={(e) => setNewPlant({ ...newPlant, name: e.target.value })}
+        />
+        <input
+          type="file"
+          onChange={handleImageUpload}
+        />
+        <textarea
+          placeholder="Plant description"
+          value={newPlant.description}
+          onChange={(e) => setNewPlant({ ...newPlant, description: e.target.value })}
+        />
+        <button onClick={handleAdd}>Add Plant</button>
       </div>
     </main>
   );
