@@ -42,7 +42,8 @@ const MyPlantsPage = () => {
       <div className="plant-grid">
         {plants.map((plant) => (
           <div className="plant-listing" key={plant._id}>
-            <img src={`/uploads/${plant.image}`} alt={plant.name} /> 
+            <img src={`http://localhost:5001/uploads/${plant.image}`} alt={plant.name} />
+
             <h3>{plant.name}</h3>
             <p>{plant.description}</p>
             <div className="plant-buttons">

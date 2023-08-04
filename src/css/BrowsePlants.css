@@ -47,8 +47,38 @@
 }
 
 .browse-plants .plant-grid {
-    display: grid; /* Use CSS Grid for layout */
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Create a responsive grid with a minimum column width of 200px */
-    gap: 20px; /* Add some space between grid items */
-    padding: 20px; /* Add padding to the grid */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 50px;
+}
+
+.browse-plants .plant-listing {
+    width: 200px;
+    border: 1px solid #006400;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.browse-plants .plant-listing img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.browse-plants .plant-listing h3, .browse-plants .plant-listing p, .browse-plants .plant-listing .plant-buttons {
+    text-align: center;
+    width: 100%;
+}
+
+.browse-plants .plant-listing .plant-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 10px;
 }
