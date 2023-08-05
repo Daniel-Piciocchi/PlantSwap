@@ -5,6 +5,7 @@ import '../css/BrowsePlants.css';
 const BrowsePlantsPage = () => {
   const [plants, setPlants] = useState([]);
   const [messages, setMessages] = useState({});
+  const [showPopup, setShowPopup] = useState(false); // 1. New state for the popup
 
   useEffect(() => {
     const fetchPlants = async () => {
@@ -21,6 +22,7 @@ const BrowsePlantsPage = () => {
       .set('Authorization', `Bearer ${token}`)
       .send({ requester: 'userId', requestedPlant: plantId, message: messages[plantId] });
     console.log(response.body);
+    setShowPopup(true); // 3. Show the popup after making the request
   };
 
   const handleMessageChange = (plantId, message) => {
@@ -46,6 +48,14 @@ const BrowsePlantsPage = () => {
           </div>
         ))}
       </div>
+
+      {showPopup && ( // 4. Conditionally render the popup based on its state
+        <div className="popup">
+          <p>Swap Requested!</p>
+          <button onClick={() => setShowPopup(false)}>Close</button>
+        </div>
+      )}
+
     </main>
   );
 };

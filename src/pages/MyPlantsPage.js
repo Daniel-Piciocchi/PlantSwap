@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import request from 'superagent';
-import '../css/MyPlants.css'; // Import the CSS
+import '../css/MyPlants.css';
 
 const MyPlantsPage = () => {
   const [plants, setPlants] = useState([]);
   const [newPlant, setNewPlant] = useState({ name: '', image: '', description: '' });
-
+  const [editMode, setEditMode] = useState(false);
+  const [editedPlant, setEditedPlant] = useState({});
+  const [showPopup, setShowPopup] = useState(false);
+  
   useEffect(() => {
     const fetchPlants = async () => {
       try {
-        const token = localStorage.getItem('token'); // Assuming you're storing the token in local storage
+        const token = localStorage.getItem('token'); 
         const response = await request.get('http://localhost:5001/plants/user').set('Authorization', `Bearer ${token}`);
-        console.log('Fetched plants:', response.body);
         setPlants(response.body);
       } catch (error) {
         console.error('Error fetching plants:', error);
-        // Handle the error, maybe set some state to show an error message to the user
       }
     };
     fetchPlants();
-  }, []); // Removed plants from the dependency array
+  }, []);
 
   const handleDelete = async (id) => {
     try {
@@ -27,33 +28,58 @@ const MyPlantsPage = () => {
       setPlants(plants.filter((plant) => plant._id !== id));
     } catch (error) {
       console.error('Error deleting plant:', error);
-      // Handle the error, maybe set some state to show an error message to the user
     }
   };
 
   const handleAdd = async () => {
     try {
-      const token = localStorage.getItem('token'); // Fetch the token again for the POST request
+      const token = localStorage.getItem('token'); 
       const formData = new FormData();
       formData.append('image', newPlant.image);
       formData.append('name', newPlant.name);
       formData.append('description', newPlant.description);
       const response = await request.post('http://localhost:5001/plants')
-                                    .set('Authorization', `Bearer ${token}`) // Include the token in the request header
+                                    .set('Authorization', `Bearer ${token}`)
                                     .send(formData);
-      console.log('Server response:', response);
-      console.log('Response data:', response.body);
       setPlants([...plants, response.body]);
       setNewPlant({ name: '', image: '', description: '' });
-      console.log('Plants after adding:', plants);
     } catch (error) {
       console.error('Error adding plant:', error);
-      // Handle the error, maybe set some state to show an error message to the user
     }
   };
 
   const handleImageUpload = (event) => {
     setNewPlant({ ...newPlant, image: event.target.files[0] });
+  };
+
+  const startEdit = (plant) => {
+    console.log("Editing plant: ", plant);
+    setEditMode(true);
+    setEditedPlant(plant);
+  };
+
+  const handleEditChange = (field, value) => {
+    setEditedPlant({ ...editedPlant, [field]: value });
+  };
+
+  const handleUpdate = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const formData = new FormData();
+      formData.append('image', editedPlant.image);
+      formData.append('name', editedPlant.name);
+      formData.append('description', editedPlant.description);
+      const response = await request.put(`http://localhost:5001/plants/${editedPlant._id}`)
+                                    .set('Authorization', `Bearer ${token}`)
+                                    .send(formData);
+      const updatedPlant = response.body;
+      const updatedPlants = plants.map(plant => plant._id === updatedPlant._id ? updatedPlant : plant);
+      setPlants(updatedPlants);
+      setEditMode(false);
+      setShowPopup(true); 
+    } catch (error) {
+      console.error('Error updating plant:', error);
+    }
   };
 
   return (
@@ -66,32 +92,67 @@ const MyPlantsPage = () => {
             <h3>{plant.name}</h3>
             <p>{plant.description}</p>
             <div className="plant-buttons">
-              <button>Edit</button>
+              <button onClick={() => startEdit(plant)}>Edit</button>
               <button onClick={() => handleDelete(plant._id)}>Delete</button>
             </div>
           </div>
         ))}
       </div>
 
-      <h2>Add a New Plant</h2>
-      <div className="add-plant">
-        <input
-          type="text"
-          placeholder="Plant name"
-          value={newPlant.name}
-          onChange={(e) => setNewPlant({ ...newPlant, name: e.target.value })}
-        />
-        <input
-          type="file"
-          onChange={handleImageUpload}
-        />
-        <textarea
-          placeholder="Plant description"
-          value={newPlant.description}
-          onChange={(e) => setNewPlant({ ...newPlant, description: e.target.value })}
-        />
-        <button onClick={handleAdd}>Add Plant</button>
-      </div>
+      {showPopup && (
+        <div className="popup">
+          <p>Plant Updated!</p>
+          <button onClick={() => setShowPopup(false)}>Close</button>
+        </div>
+      )}
+
+      {!editMode && (
+        <>
+          <h2>Add a New Plant</h2>
+          <div className="add-plant">
+            <input
+              type="text"
+              placeholder="Plant name"
+              value={newPlant.name}
+              onChange={(e) => setNewPlant({ ...newPlant, name: e.target.value })}
+            />
+            <input
+              type="file"
+              onChange={handleImageUpload}
+            />
+            <textarea
+              placeholder="Plant description"
+              value={newPlant.description}
+              onChange={(e) => setNewPlant({ ...newPlant, description: e.target.value })}
+            />
+            <button onClick={handleAdd}>Add Plant</button>
+          </div>
+        </>
+      )}
+
+      {editMode && (
+        <>
+          <h2>Edit Plant</h2>
+          <div className="add-plant">
+            <input
+              type="text"
+              placeholder="Plant name"
+              value={editedPlant.name}
+              onChange={(e) => handleEditChange('name', e.target.value)}
+            />
+            <input
+              type="file"
+              onChange={(e) => handleEditChange('image', e.target.files[0])}
+            />
+            <textarea
+              placeholder="Plant description"
+              value={editedPlant.description}
+              onChange={(e) => handleEditChange('description', e.target.value)}
+            />
+            <button onClick={handleUpdate}>Update Plant</button>
+          </div>
+        </>
+      )}
     </main>
   );
 };
