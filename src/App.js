@@ -5,25 +5,24 @@ import Footer from './pages/Footer';
 import HomePage from './pages/HomePage';
 import BrowsePlantsPage from './pages/BrowsePlantsPage';
 import MyPlantsPage from './pages/MyPlantsPage';
+import MessagesPage from './pages/MessagesPage'; // Import the MessagesPage
 import LoginRegisterPage from './pages/LoginRegisterPage';
-import ContactPage from './pages/ContactPage';
-import { AuthProvider } from './AuthContext'; // adjust the path according to your project structure
+import { AuthProvider } from './AuthContext';
 
 const App = () => (
-    <AuthProvider>
-      <Router>
-        <Header />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/browse-plants" element={<BrowsePlantsPage />} />
-          <Route path="/my-plants" element={<MyPlantsPage />} />
-          <Route path="/login-register" element={<LoginRegisterPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-        </Routes>
-        <Footer />
-      </Router>
-    </AuthProvider>
-  );
-  
+  <AuthProvider>
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/browse-plants" element={<BrowsePlantsPage />} />
+        <Route path="/my-plants" element={<MyPlantsPage />} />
+        <Route path="/messages" element={<MessagesPage />} /> {/* Add this line */}
+        <Route path="/login-register" element={<LoginRegisterPage />} />
+      </Routes>
+      <Footer />
+    </Router>
+  </AuthProvider>
+);
 
 export default App;

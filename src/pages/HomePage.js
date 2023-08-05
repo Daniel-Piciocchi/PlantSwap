@@ -22,23 +22,6 @@ const HomePage = () => {
         <li>Request a swap</li>
         <li>Coordinate with the other person</li>
       </ol>
-
-      <h2>Featured Plants</h2>
-      {/* Replace with your actual plant data */}
-      <div>
-        <Link to="/browse-plants">
-          <img src="plant1.jpg" alt="Plant 1" />
-          <p>Plant 1</p>
-        </Link>
-        <Link to="/browse-plants">
-          <img src="plant2.jpg" alt="Plant 2" />
-          <p>Plant 2</p>
-        </Link>
-        <Link to="/browse-plants">
-          <img src="plant3.jpg" alt="Plant 3" />
-          <p>Plant 3</p>
-        </Link>
-      </div>
     </main>
   );
 };

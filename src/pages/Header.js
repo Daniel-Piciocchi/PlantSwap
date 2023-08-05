@@ -1,34 +1,35 @@
 import React, { useState, useContext } from 'react';
 import '../css/Header.css';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
-import logo from '../images/logo2.png'; // Import the logo image
+import { Link, useNavigate } from 'react-router-dom';
+import logo from '../images/logo2.png';
 import { AuthContext } from '../AuthContext';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext); // Get setIsLoggedIn from AuthContext
-  const navigate = useNavigate(); // Get the useNavigate function
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const toggleNav = () => {
     setIsOpen(!isOpen);
   };
 
   const handleLogout = () => {
-    setIsLoggedIn(false); // Set isLoggedIn to false
-    navigate('/'); // Redirect to home page
+    setIsLoggedIn(false);
+    navigate('/');
   };
 
   return (
     <header className="header">
       <Link to="/">
-        <img src={logo} alt="Logo" style={{ maxWidth: '30px' }} /> {/* Limit the logo size to a maximum width of 100px */}
+        <img src={logo} alt="Logo" style={{ maxWidth: '30px' }} />
       </Link>
       <nav className={`nav ${isOpen ? 'open' : ''}`}>
-        <Link to="/browse-plants">Browse</Link>
+        {isLoggedIn && <Link to="/browse-plants">Browse</Link>}
         {isLoggedIn ? (
           <>
             <Link to="/my-plants">My:Plants</Link>
-            <Link to="/" onClick={handleLogout}>Logout</Link> {/* When the logout link is clicked, handleLogout will be called */}
+            <Link to="/messages">Messages</Link>
+            <Link to="/" onClick={handleLogout}>Logout</Link>
           </>
         ) : (
           <Link to="/login-register">Login/Register</Link>

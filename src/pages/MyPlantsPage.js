@@ -9,6 +9,7 @@ const MyPlantsPage = () => {
   useEffect(() => {
     const fetchPlants = async () => {
       const response = await request.get('http://localhost:5001/plants');
+      console.log('Fetched plants:', response.body);  // Log fetched plants
       setPlants(response.body);
     };
     fetchPlants();

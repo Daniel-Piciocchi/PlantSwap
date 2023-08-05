@@ -28,7 +28,6 @@ const LoginRegisterPage = () => {
   const navigate = useNavigate();
   const { setIsLoggedIn } = useContext(AuthContext);
 
-
   const registerFormik = useFormik({
     initialValues: {
       username: '',
@@ -37,7 +36,6 @@ const LoginRegisterPage = () => {
     },
     validationSchema: registrationValidationSchema,
     onSubmit: async (values) => {
-      // Here you could make a request to your backend to register the user
       console.log(values);
       const response = await fetch('http://localhost:5001/auth/register', {
         method: 'POST',
@@ -45,7 +43,7 @@ const LoginRegisterPage = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(values),
-        credentials: 'include', // Include credentials for CORS
+        credentials: 'include',
       });
       if (response.ok) {
         setAccountCreated(true);
@@ -60,7 +58,6 @@ const LoginRegisterPage = () => {
     },
     validationSchema: loginValidationSchema,
     onSubmit: async (values) => {
-      // Here you could make a request to your backend to log in the user
       console.log(values);
       const response = await fetch('http://localhost:5001/auth/login', {
         method: 'POST',
@@ -68,9 +65,12 @@ const LoginRegisterPage = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(values),
-        credentials: 'include', // Include credentials for CORS
+        credentials: 'include',
       });
       if (response.ok) {
+        const data = await response.json(); // Parse the JSON response
+        console.log('Token:', data.token); // Log the token
+        localStorage.setItem('token', data.token); // Save the token in local storage
         console.log('Logged in successfully');
         setIsLoggedIn(true);
         navigate('/browse-plants');

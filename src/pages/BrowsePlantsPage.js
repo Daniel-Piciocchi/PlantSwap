@@ -1,10 +1,10 @@
-// BrowsePlantsPage.js
 import React, { useState, useEffect } from 'react';
 import request from 'superagent';
-import '../css/BrowsePlants.css'; // Import the CSS
+import '../css/BrowsePlants.css';
 
 const BrowsePlantsPage = () => {
   const [plants, setPlants] = useState([]);
+  const [messages, setMessages] = useState({});
 
   useEffect(() => {
     const fetchPlants = async () => {
@@ -15,9 +15,16 @@ const BrowsePlantsPage = () => {
   }, []);
 
   const handleRequestSwap = async (plantId) => {
-    // Here you can send a POST request to the server to create a new swap request
-    // You might need to include the user ID and the plant ID in the request body
-    console.log(`Request to swap plant with ID: ${plantId}`);
+    const token = localStorage.getItem('token');
+    const response = await request
+      .post('http://localhost:5001/swaps')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ requester: 'userId', requestedPlant: plantId, message: messages[plantId] });
+    console.log(response.body);
+  };
+
+  const handleMessageChange = (plantId, message) => {
+    setMessages({ ...messages, [plantId]: message });
   };
 
   return (
@@ -30,6 +37,11 @@ const BrowsePlantsPage = () => {
             <img src={`http://localhost:5001/uploads/${plant.image}`} alt={plant.name} />
             <h3>{plant.name}</h3>
             <p>{plant.description}</p>
+            <textarea
+              placeholder="Enter your message here"
+              value={messages[plant._id] || ''}
+              onChange={(e) => handleMessageChange(plant._id, e.target.value)}
+            />
             <button className="request-swap-button" onClick={() => handleRequestSwap(plant._id)}>Request Swap</button>
           </div>
         ))}
