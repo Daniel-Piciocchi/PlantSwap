@@ -13,12 +13,15 @@ const MessagesPage = () => {
       const decodedToken = jwt_decode(token);
       const userId = decodedToken._id;
 
+      console.log('Fetching messages for user:', userId);
+
       try {
         const response = await axios.get(`http://localhost:5001/swaps/${userId}`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
         });
+        console.log('Fetched messages:', response.data);
         setMessages(response.data);
       } catch (error) {
         console.error('Error fetching messages:', error);
@@ -29,6 +32,7 @@ const MessagesPage = () => {
   }, []);
 
   const handleAcceptMessage = async (message) => {
+    console.log('Accepting message:', message);
     try {
       const token = localStorage.getItem('token');
       await axios.put(`http://localhost:5001/swaps/${message._id}`, { status: 'Pending' }, {
@@ -56,6 +60,7 @@ const MessagesPage = () => {
   };
 
   const handleReject = async (messageId) => {
+    console.log('Rejecting message with ID:', messageId);
     try {
       const token = localStorage.getItem('token');
       await axios.delete(`http://localhost:5001/swaps/${messageId}`, {
