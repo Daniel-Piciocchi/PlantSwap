@@ -1,0 +1,62 @@
+/* src/css/contact.css */
+
+.contact-page {
+    text-align: center;
+    padding: 50px;
+    background-color: #f0f8ff;
+    color: #006400;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  
+  .contact-page h1 {
+    font-size: 2.5em;
+  }
+  
+  .contact-page form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .contact-page label {
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+  
+  .contact-page input[type="text"],
+  .contact-page input[type="email"],
+  .contact-page textarea {
+    width: 300px; /* Set the width for the input fields and the textarea */
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px; /* Add some margin at the bottom */
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .contact-page textarea {
+    height: 150px;
+    resize: vertical;
+  }
+  
+  .contact-page .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .contact-page input[type="submit"] {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #006400;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .contact-page input[type="submit"]:hover {
+    background-color: #004d00;
+  }
+  

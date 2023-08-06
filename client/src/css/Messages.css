@@ -1,0 +1,77 @@
+.plant-swap {
+    text-align: center;
+    padding-bottom: 50px;
+    background-color: #f0f8ff;
+    color: #006400;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.plant-swap h1, .plant-swap h2 {
+    font-size: 2.5em;
+}
+
+
+.plant-swap button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #006400;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.plant-swap button:hover {
+    background-color: #004d00;
+}
+
+.plant-swap h2 {
+    margin-bottom: 50px;
+}
+
+.plant-swap ol {
+    list-style-position: inside;
+    font-size: 1.2em;
+}
+
+.plant-swap ol li {
+    margin-bottom: 10px;
+}
+
+.plant-swap .plant-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 50px;
+}
+
+.plant-swap .plant-listing {
+    width: 300px;
+    border: 1px solid #006400;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.plant-swap .plant-listing img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.plant-swap .plant-listing h3, .plant-swap .plant-listing p, .plant-swap .plant-listing .plant-buttons {
+    text-align: center;
+    width: 88%;
+}
+
+.plant-swap .plant-listing .plant-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 10px;
+}

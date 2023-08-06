@@ -1,0 +1,60 @@
+/* src/css/Header.css */
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 10%;
+    background-color: #f0f8ff;
+    color: #006400;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.header nav a {
+    margin-left: 10px;
+    color: #006400;
+    text-decoration: none;
+    font-size: 1.0em;
+}
+
+.header nav a:hover {
+    color: #004d00;
+}
+
+.hamburger-menu, .close-btn {
+    background: none;
+    border: none;
+    color: #006400;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.hide {
+    display: none;
+}
+
+.nav {
+    top: 20px; 
+    right: 110px;
+    display: none;
+    flex-direction: column;
+    align-items: flex-end;
+    background-color: #f0f8ff; 
+    padding: 10px;
+}
+
+
+.nav.open {
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (min-width: 768px) {
+    .hamburger-menu, .close-btn {
+        display: none;
+    }
+
+    .nav {
+        display: flex;
+        flex-direction: row;
+        align-items: center; 
+    }
+}
