@@ -32,7 +32,7 @@ const BrowsePlantsPage = () => {
     
     // Making a POST request to request a swap
     const response = await request
-      .post('http://plantswap-6dabb95ad1f6.herokuapp.com/swaps')
+      .post('https://plantswap-6dabb95ad1f6.herokuapp.com/swaps')
       .set('Authorization', `Bearer ${token}`)
       .send({ requester: 'userId', requestedPlant: plantId, message: messages[plantId] });
     

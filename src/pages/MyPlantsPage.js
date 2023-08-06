@@ -17,7 +17,7 @@ const MyPlantsPage = () => {
       try {
         const token = localStorage.getItem('token'); // Get the user's authentication token from local storage
         const response = await superagent // Use superagent library to make an authenticated GET request to fetch user's plants
-          .get('http://plantswap-6dabb95ad1f6.herokuapp.com/plants/user')
+          .get('https://plantswap-6dabb95ad1f6.herokuapp.com/plants/user')
           .set('Authorization', `Bearer ${token}`);
         setPlants(response.body); // Update the state with the fetched plant data
       } catch (error) {
@@ -30,7 +30,7 @@ const MyPlantsPage = () => {
   // Function to handle the deletion of a plant
   const handleDelete = async (id) => {
     try {
-      await superagent.delete(`http://plantswap-6dabb95ad1f6.herokuapp.com/plants/${id}`); // Use superagent to make an authenticated DELETE request to delete the plant
+      await superagent.delete(`https://plantswap-6dabb95ad1f6.herokuapp.com/plants/${id}`); // Use superagent to make an authenticated DELETE request to delete the plant
       setPlants(plants.filter((plant) => plant._id !== id)); // Update the state by filtering out the deleted plant from the plants array
     } catch (error) {
       console.error('Error deleting plant:', error);
@@ -46,7 +46,7 @@ const MyPlantsPage = () => {
       formData.append('name', newPlant.name);
       formData.append('description', newPlant.description);
       const response = await superagent // Use superagent to make an authenticated POST request to add the new plant
-        .post('http://plantswap-6dabb95ad1f6.herokuapp.com/plants')
+        .post('https://plantswap-6dabb95ad1f6.herokuapp.com/plants')
         .set('Authorization', `Bearer ${token}`)
         .send(formData);
       setPlants([...plants, response.body]); // Update the state by adding the newly added plant to the plants array
@@ -82,7 +82,7 @@ const MyPlantsPage = () => {
       formData.append('name', editedPlant.name);
       formData.append('description', editedPlant.description);
       const response = await superagent // Use superagent to make an authenticated PUT request to update the edited plant
-        .put(`http://plantswap-6dabb95ad1f6.herokuapp.com/plants/${editedPlant._id}`)
+        .put(`https://plantswap-6dabb95ad1f6.herokuapp.com/plants/${editedPlant._id}`)
         .set('Authorization', `Bearer ${token}`)
         .send(formData);
       const updatedPlant = response.body; // Get the updated plant data from the response
@@ -102,7 +102,7 @@ const MyPlantsPage = () => {
       <div className="plant-grid">
         {plants.map((plant) => (
           <div className="plant-listing" key={plant._id}>
-            <img src={`http://plantswap-6dabb95ad1f6.herokuapp.com/uploads/${plant.image}`} alt={plant.name} />
+            <img src={`https://plantswap-6dabb95ad1f6.herokuapp.com/uploads/${plant.image}`} alt={plant.name} />
             <h3>{plant.name}</h3>
             <p>{plant.description}</p>
             <div className="plant-buttons">
