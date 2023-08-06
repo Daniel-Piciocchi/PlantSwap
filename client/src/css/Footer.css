@@ -1,0 +1,32 @@
+/* src/css/Footer.css */
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    background-color: #f0f8ff;
+    color: #006400;
+    font-family: 'Courier New', Courier, monospace;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.footer a {
+    margin: 0 10px;
+    color: #006400;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+.footer a:hover {
+    color: #004d00;
+}
+
+/* src/css/App.css */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f0f8ff;
+    font-family: 'Courier New', Courier, monospace;
+}

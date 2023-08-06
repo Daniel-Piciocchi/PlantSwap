@@ -1,0 +1,57 @@
+/* src/css/HomePage.css */
+.home {
+    text-align: center;
+    padding-bottom: 50px;
+    background-color: #f0f8ff;
+    color: #006400;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.home h1 {
+    font-size: 2.5em;
+}
+
+.home p {
+    font-size: 1.2em;
+    padding: 20px;
+}
+
+.home button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #006400;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.home button:hover {
+    background-color: #004d00;
+}
+
+.home h2 {
+    margin-top: 60px; 
+    
+}
+
+.home ol {
+    list-style-position: inside;
+    font-size: 1.2em;
+}
+
+.home ol li {
+    margin-bottom: 10px;
+}
+
+.parlour-palm-image {
+    width: 100%; 
+    max-width: 400px; 
+    height: auto; 
+    display: block; 
+    margin: 20px auto; 
+    border-radius: 20px; 
+}
+
+
