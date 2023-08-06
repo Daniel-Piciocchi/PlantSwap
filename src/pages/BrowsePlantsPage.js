@@ -18,7 +18,7 @@ const BrowsePlantsPage = () => {
   useEffect(() => {
     const fetchPlants = async () => {
       // Making a GET request to fetch plants
-      const response = await request.get('http://localhost:5001/plants');
+      const response = await request.get('http://plantswap-6dabb95ad1f6.herokuapp.com/plants');
       setPlants(response.body); // Updating the plants state
     };
     
@@ -32,7 +32,7 @@ const BrowsePlantsPage = () => {
     
     // Making a POST request to request a swap
     const response = await request
-      .post('http://localhost:5001/swaps')
+      .post('http://plantswap-6dabb95ad1f6.herokuapp.com/swaps')
       .set('Authorization', `Bearer ${token}`)
       .send({ requester: 'userId', requestedPlant: plantId, message: messages[plantId] });
     
@@ -54,7 +54,7 @@ const BrowsePlantsPage = () => {
         {/* Looping through the plants to render their data */}
         {plants.map((plant) => (
           <div className="plant-listing" key={plant._id}>
-            <img src={`http://localhost:5001/uploads/${plant.image}`} alt={plant.name} />
+            <img src={`http://plantswap-6dabb95ad1f6.herokuapp.com/uploads/${plant.image}`} alt={plant.name} />
             <h3>{plant.name}</h3>
             <p>{plant.description}</p>
             <textarea

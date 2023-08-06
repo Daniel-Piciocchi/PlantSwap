@@ -2,6 +2,13 @@
 
 This README contains the installation guide for running the application, the libraries used, and the agile methodology that can be viewed on the Trello board.
 
+The application on the front end can be viewed here:
+
+https://sensational-khapse-751756.netlify.app/
+
+The application on the backend can be viewed here:
+
+https://plantswap-6dabb95ad1f6.herokuapp.com/
 ## Installation
 
 #### Clone the repository:
@@ -25,7 +32,7 @@ To start the client-side of the application, run the following command:
 
 npm start
 
-The React application will be available at http://localhost:3000.
+The React application will be available at http://plantswap-6dabb95ad1f6.herokuapp.com.
 
 #### Server-Side (Node.js)
 
@@ -33,7 +40,7 @@ To start the server-side of the application, run the following command:
 
 npm start
 
-The server will be running at http://localhost:5001.
+The server will be running at http://plantswap-6dabb95ad1f6.herokuapp.com.
 
 ## Libraries Used
 
