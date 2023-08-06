@@ -1,46 +1,55 @@
+// Import necessary libraries and styles
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import jwt_decode from 'jwt-decode';
+import axios from 'axios';  // For making HTTP requests
+import jwt_decode from 'jwt-decode';  // For decoding JSON Web Tokens
 
-import '../css/Messages.css';
+import '../css/Messages.css';  // Importing styles for the component
 
+// Define the MessagesPage component
 const MessagesPage = () => {
+  // Define state for messages
   const [messages, setMessages] = useState([]);
 
+  // Use the useEffect hook to fetch messages when the component mounts
   useEffect(() => {
+    // Define an asynchronous function to fetch messages
     const fetchMessages = async () => {
-      const token = localStorage.getItem('token');
-      const decodedToken = jwt_decode(token);
-      const userId = decodedToken._id;
+      const token = localStorage.getItem('token');  // Retrieve the token from local storage
+      const decodedToken = jwt_decode(token);  // Decode the token to get user information
+      const userId = decodedToken._id;  // Extract user ID from the decoded token
 
       console.log('Fetching messages for user:', userId);
 
       try {
+        // Make a GET request to fetch messages for the current user
         const response = await axios.get(`http://localhost:5001/swaps/${userId}`, {
           headers: {
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token}`  // Pass the token in headers for authentication
           }
         });
         console.log('Fetched messages:', response.data);
-        setMessages(response.data);
+        setMessages(response.data);  // Update the state with the fetched messages
       } catch (error) {
-        console.error('Error fetching messages:', error);
+        console.error('Error fetching messages:', error);  // Log any error that occurs during the fetch
       }
     };
 
-    fetchMessages();
+    fetchMessages();  // Call the fetchMessages function
   }, []);
 
+  // Define a handler to accept a message
   const handleAcceptMessage = async (message) => {
     console.log('Accepting message:', message);
     try {
       const token = localStorage.getItem('token');
+      // Make a PUT request to update the status of the message to "Pending"
       await axios.put(`http://localhost:5001/swaps/${message._id}`, { status: 'Pending' }, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
 
+      // Update the local state with the modified status
       const updatedMessages = messages.map(msg => {
         if (msg._id === message._id) {
           return { ...msg, status: 'Pending' };
@@ -49,7 +58,7 @@ const MessagesPage = () => {
       });
       setMessages(updatedMessages);
 
-      // Open email client
+      // Open the email client to allow the user to send a response
       const email = message.requester?.email || '';
       const subject = 'Swap Request Response';
       window.location.href = `mailto:${email}?subject=${subject}`;
@@ -59,21 +68,25 @@ const MessagesPage = () => {
     }
   };
 
+  // Define a handler to reject a message
   const handleReject = async (messageId) => {
     console.log('Rejecting message with ID:', messageId);
     try {
       const token = localStorage.getItem('token');
+      // Make a DELETE request to remove the message from the server
       await axios.delete(`http://localhost:5001/swaps/${messageId}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
+      // Update the local state to remove the rejected message
       setMessages(prevMessages => prevMessages.filter(message => message._id !== messageId));
     } catch (error) {
       console.error('Error deleting message:', error);
     }
   };
 
+  // Render the messages and provide UI to accept or reject each message
   return (
     <div className="plant-swap">
       <h2>Swap Requests</h2>
@@ -104,4 +117,4 @@ const MessagesPage = () => {
   );
 };
 
-export default MessagesPage;
+export default MessagesPage;  // Export the component for use in other parts of the application

@@ -1,22 +1,25 @@
+// Importing necessary modules and styles
 import React, { useState, useEffect } from 'react';
-import superagent from 'superagent'; // Importing superagent library
+import superagent from 'superagent'; // Importing superagent library for making HTTP requests
 import '../css/MyPlants.css';
 
 const MyPlantsPage = () => {
-  const [plants, setPlants] = useState([]);
-  const [newPlant, setNewPlant] = useState({ name: '', image: '', description: '' });
-  const [editMode, setEditMode] = useState(false);
-  const [editedPlant, setEditedPlant] = useState({});
-  const [showPopup, setShowPopup] = useState(false);
-  
+  // State variables to manage plants, newPlant form, edit mode, edited plant, and popup display
+  const [plants, setPlants] = useState([]); // An array to store the user's plants
+  const [newPlant, setNewPlant] = useState({ name: '', image: '', description: '' }); // State for new plant form
+  const [editMode, setEditMode] = useState(false); // Boolean state to control edit mode for a specific plant
+  const [editedPlant, setEditedPlant] = useState({}); // State to hold the edited plant data
+  const [showPopup, setShowPopup] = useState(false); // State to control the display of a success popup message
+
+  // useEffect to fetch user's plants when the component mounts
   useEffect(() => {
     const fetchPlants = async () => {
       try {
-        const token = localStorage.getItem('token'); 
-        const response = await superagent // Use superagent here instead of request
+        const token = localStorage.getItem('token'); // Get the user's authentication token from local storage
+        const response = await superagent // Use superagent library to make an authenticated GET request to fetch user's plants
           .get('http://localhost:5001/plants/user')
           .set('Authorization', `Bearer ${token}`);
-        setPlants(response.body);
+        setPlants(response.body); // Update the state with the fetched plant data
       } catch (error) {
         console.error('Error fetching plants:', error);
       }
@@ -24,68 +27,75 @@ const MyPlantsPage = () => {
     fetchPlants();
   }, []);
 
+  // Function to handle the deletion of a plant
   const handleDelete = async (id) => {
     try {
-      await superagent.delete(`http://localhost:5001/plants/${id}`); // Use superagent here instead of request
-      setPlants(plants.filter((plant) => plant._id !== id));
+      await superagent.delete(`http://localhost:5001/plants/${id}`); // Use superagent to make an authenticated DELETE request to delete the plant
+      setPlants(plants.filter((plant) => plant._id !== id)); // Update the state by filtering out the deleted plant from the plants array
     } catch (error) {
       console.error('Error deleting plant:', error);
     }
   };
 
+  // Function to handle adding a new plant
   const handleAdd = async () => {
     try {
-      const token = localStorage.getItem('token'); 
-      const formData = new FormData();
+      const token = localStorage.getItem('token'); // Get the user's authentication token from local storage
+      const formData = new FormData(); // Create a new FormData instance to send the form data
       formData.append('image', newPlant.image);
       formData.append('name', newPlant.name);
       formData.append('description', newPlant.description);
-      const response = await superagent // Use superagent here instead of request
+      const response = await superagent // Use superagent to make an authenticated POST request to add the new plant
         .post('http://localhost:5001/plants')
         .set('Authorization', `Bearer ${token}`)
         .send(formData);
-      setPlants([...plants, response.body]);
-      setNewPlant({ name: '', image: '', description: '' });
+      setPlants([...plants, response.body]); // Update the state by adding the newly added plant to the plants array
+      setNewPlant({ name: '', image: '', description: '' }); // Clear the newPlant form fields
     } catch (error) {
       console.error('Error adding plant:', error);
     }
   };
 
+  // Function to handle image upload for the new plant form
   const handleImageUpload = (event) => {
-    setNewPlant({ ...newPlant, image: event.target.files[0] });
+    setNewPlant({ ...newPlant, image: event.target.files[0] }); // Update the newPlant state with the selected image file
   };
 
+  // Function to set edit mode and set the plant data to be edited
   const startEdit = (plant) => {
     console.log("Editing plant: ", plant);
-    setEditMode(true);
-    setEditedPlant(plant);
+    setEditMode(true); // Set the edit mode to true to switch to edit mode
+    setEditedPlant(plant); // Set the editedPlant state to the plant data that needs to be edited
   };
 
+  // Function to handle changes to the edited plant data
   const handleEditChange = (field, value) => {
-    setEditedPlant({ ...editedPlant, [field]: value });
+    setEditedPlant({ ...editedPlant, [field]: value }); // Update the editedPlant state with the changed field and its value
   };
 
+  // Function to handle the update of an edited plant
   const handleUpdate = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const formData = new FormData();
+      const token = localStorage.getItem('token'); // Get the user's authentication token from local storage
+      const formData = new FormData(); // Create a new FormData instance to send the updated form data
       formData.append('image', editedPlant.image);
       formData.append('name', editedPlant.name);
       formData.append('description', editedPlant.description);
-      const response = await superagent // Use superagent here instead of request
+      const response = await superagent // Use superagent to make an authenticated PUT request to update the edited plant
         .put(`http://localhost:5001/plants/${editedPlant._id}`)
         .set('Authorization', `Bearer ${token}`)
         .send(formData);
-      const updatedPlant = response.body;
-      const updatedPlants = plants.map(plant => plant._id === updatedPlant._id ? updatedPlant : plant);
-      setPlants(updatedPlants);
-      setEditMode(false);
-      setShowPopup(true); 
+      const updatedPlant = response.body; // Get the updated plant data from the response
+      const updatedPlants = plants.map((plant) => plant._id === updatedPlant._id ? updatedPlant : plant); // Map through the plants array to update the specific edited plant
+      setPlants(updatedPlants); // Update the state with the updated plants array
+      setEditMode(false); // Switch off the edit mode
+      setShowPopup(true); // Display the success popup message
     } catch (error) {
       console.error('Error updating plant:', error);
     }
   };
 
+  // Render the component
   return (
     <main className="myPlants">
       <h1>My Plant Listings</h1>
@@ -110,6 +120,7 @@ const MyPlantsPage = () => {
         </div>
       )}
 
+      {/* Display the add new plant form if not in edit mode */}
       {!editMode && (
         <>
           <h2>Add a New Plant</h2>
@@ -134,6 +145,7 @@ const MyPlantsPage = () => {
         </>
       )}
 
+      {/* Display the edit plant form if in edit mode */}
       {editMode && (
         <>
           <h2>Edit Plant</h2>

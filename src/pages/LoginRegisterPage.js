@@ -1,10 +1,12 @@
+// Importing necessary modules and styles
 import React, { useState, useContext } from 'react';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import { useFormik } from 'formik'; // Importing formik for form handling
+import * as Yup from 'yup'; // Importing Yup for form validation
 import '../css/LoginRegister.css';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
 
+// Validation schema for registration form
 const registrationValidationSchema = Yup.object({
   username: Yup.string().required('Required'),
   email: Yup.string().email('Invalid email address').required('Required'),
@@ -13,16 +15,19 @@ const registrationValidationSchema = Yup.object({
     .required('Required'),
 });
 
+// Validation schema for login form
 const loginValidationSchema = Yup.object({
   username: Yup.string().required('Required'),
   password: Yup.string().required('Required'),
 });
 
 const LoginRegisterPage = () => {
+  // State variables to manage account creation and navigation
   const [accountCreated, setAccountCreated] = useState(false);
   const navigate = useNavigate();
-  const { setIsLoggedIn } = useContext(AuthContext);
+  const { setIsLoggedIn } = useContext(AuthContext); // Context to manage user authentication state
 
+  // Formik for the registration form
   const registerFormik = useFormik({
     initialValues: {
       username: '',
@@ -46,6 +51,7 @@ const LoginRegisterPage = () => {
     },
   });
 
+  // Formik for the login form
   const loginFormik = useFormik({
     initialValues: {
       username: '',
@@ -65,14 +71,15 @@ const LoginRegisterPage = () => {
       if (response.ok) {
         const data = await response.json();
         console.log('Token:', data.token);
-        localStorage.setItem('token', data.token);
+        localStorage.setItem('token', data.token); // Store the authentication token in local storage
         console.log('Logged in successfully');
-        setIsLoggedIn(true);
-        navigate('/browse-plants');
+        setIsLoggedIn(true); // Set the authentication state to logged in
+        navigate('/browse-plants'); // Navigate to the browse plants page after successful login
       }
     },
   });
 
+  // Render the component
   return (
     <main className="login-register">
       {accountCreated ? (

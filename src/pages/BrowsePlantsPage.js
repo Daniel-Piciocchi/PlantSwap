@@ -1,32 +1,49 @@
+// Importing necessary React hooks and the request library
 import React, { useState, useEffect } from 'react';
 import request from 'superagent';
-import '../css/BrowsePlants.css';
+import '../css/BrowsePlants.css'; // Importing CSS for this component
 
+// Component for browsing plant listings
 const BrowsePlantsPage = () => {
+  // State for holding plant data
   const [plants, setPlants] = useState([]);
+  
+  // State for holding messages corresponding to each plant
   const [messages, setMessages] = useState({});
-  const [showPopup, setShowPopup] = useState(false); // 1. New state for the popup
+  
+  // State for showing a popup notification
+  const [showPopup, setShowPopup] = useState(false);
 
+  // Effect hook to fetch plant data when the component mounts
   useEffect(() => {
     const fetchPlants = async () => {
+      // Making a GET request to fetch plants
       const response = await request.get('http://localhost:5001/plants');
-      setPlants(response.body);
+      setPlants(response.body); // Updating the plants state
     };
-    fetchPlants();
-  }, []);
+    
+    fetchPlants(); // Initiating the fetch
+  }, []); // Empty dependency array to ensure the effect runs only once
 
+  // Handler for requesting a plant swap
   const handleRequestSwap = async (plantId) => {
+    // Retrieve user token from local storage
     const token = localStorage.getItem('token');
+    
+    // Making a POST request to request a swap
     const response = await request
       .post('http://localhost:5001/swaps')
       .set('Authorization', `Bearer ${token}`)
       .send({ requester: 'userId', requestedPlant: plantId, message: messages[plantId] });
-    console.log(response.body);
-    setShowPopup(true); // 3. Show the popup after making the request
+    
+    console.log(response.body); // Logging the response for debugging purposes
+    
+    setShowPopup(true); // Display the popup on successful swap request
   };
 
+  // Handler for updating messages as the user types
   const handleMessageChange = (plantId, message) => {
-    setMessages({ ...messages, [plantId]: message });
+    setMessages({ ...messages, [plantId]: message }); // Update the specific plant's message
   };
 
   return (
@@ -34,6 +51,7 @@ const BrowsePlantsPage = () => {
       <h1>Browse Plants</h1>
       <h2>Plant Listings</h2>
       <div className="plant-grid">
+        {/* Looping through the plants to render their data */}
         {plants.map((plant) => (
           <div className="plant-listing" key={plant._id}>
             <img src={`http://localhost:5001/uploads/${plant.image}`} alt={plant.name} />
@@ -49,15 +67,15 @@ const BrowsePlantsPage = () => {
         ))}
       </div>
 
-      {showPopup && ( // 4. Conditionally render the popup based on its state
+      {/* Conditionally render the popup if the state is true */}
+      {showPopup && (
         <div className="popup">
           <p>Swap Requested!</p>
           <button onClick={() => setShowPopup(false)}>Close</button>
         </div>
       )}
-
     </main>
   );
 };
 
-export default BrowsePlantsPage;
+export default BrowsePlantsPage; // Exporting the component for external use
