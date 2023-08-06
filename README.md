@@ -1,74 +1,170 @@
-<<<<<<< HEAD
-# Getting Started with Create React App
+## PlantSwap (Coding Component)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This README contains the installation guide for running the application, the libraries used, and the agile methodology that can be viewed on the Trello board.
 
-## Available Scripts
+## Installation
 
-In the project directory, you can run:
+#### Clone the repository:
 
-### `npm start`
+https://github.com/Daniel-Piciocchi/PlantSwap
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### Install the necessary dependencies for the client-side (React) using the following command:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+npm install
 
-### `npm test`
+#### Install the necessary dependencies for the server-side (Node.js) using the following command:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+npm install
 
-### `npm run build`
+#### How to Run
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Client-Side (React)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To start the client-side of the application, run the following command:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+npm start
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The React application will be available at http://localhost:3000.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Server-Side (Node.js)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+To start the server-side of the application, run the following command:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+npm start
 
-## Learn More
+The server will be running at http://localhost:5001.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Libraries Used
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Client Side:
 
-### Code Splitting
+@testing-library/jest-dom, @testing-library/react, @testing-library/user-event: Testing utilities for React applications. They allow you to write and run tests for React components using Jest.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+axios: A popular library for making HTTP requests to the server. It simplifies the process of sending and handling asynchronous requests.
 
-### Analyzing the Bundle Size
+cors: A middleware that enables Cross-Origin Resource Sharing (CORS) on the client-side. It allows the client-side application to make requests to the server running on a different domain.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+formik: A form library for React that simplifies form handling and validation. It allows you to manage form state and handle form submission efficiently.
 
-### Making a Progressive Web App
+jwt-decode: A library for decoding JSON Web Tokens (JWT). It is used to extract user information from the JWT after successful authentication.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+multer: A middleware for handling file uploads in Node.js. It is used to process and store images uploaded by users.
 
-### Advanced Configuration
+react: The core library for building user interfaces in React applications.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+react-dom: A package for integrating React with the DOM (Document Object Model). It handles rendering React components to the web page.
 
-### Deployment
+react-router-dom: A popular library for handling client-side routing in React applications. It allows navigation between different pages without triggering a full server refresh.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+react-scripts: A set of scripts and configurations for bootstrapping and running React applications. It simplifies the development process by providing preconfigured build and development tools.
 
-### `npm run build` fails to minify
+superagent: A library for making HTTP requests from the client-side. It simplifies sending and handling API requests similar to Axios.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-=======
-# PlantSwap
->>>>>>> origin/main
+web-vitals: A library for measuring web performance metrics, such as Largest Contentful Paint (LCP) and First Input Delay (FID). It helps developers monitor and optimize the performance of their web applications.
+
+yup: A validation library that works seamlessly with Formik. It is used to define validation rules for form fields and provides error messages based on those rules.
+
+#### Server Side:
+
+bcryptjs: A library for hashing passwords securely. It is used to hash and compare passwords for user authentication.
+
+cors: A middleware for enabling Cross-Origin Resource Sharing (CORS) on the server-side. It allows the server to handle requests from client-side applications running on different domains.
+
+express: A minimal and flexible web application framework for Node.js. It simplifies the process of creating server-side applications and handling HTTP requests.
+
+express-session: A middleware for managing user sessions in Express applications. It stores session data on the server and sends a session ID to the client to identify the session.
+
+jsonwebtoken: A library for creating and verifying JSON Web Tokens (JWT). It is used to generate and verify tokens for user authentication and authorization.
+
+mongoose: A popular Object Data Modeling (ODM) library for MongoDB. It simplifies working with MongoDB by providing a schema-based solution for modeling data.
+
+multer: A middleware for handling file uploads in Node.js. It is used to process and store images uploaded by users.
+
+passport: A library for authentication in Node.js applications. It provides an easy-to-use interface for implementing various authentication strategies, such as local, JWT, etc.
+
+passport-jwt: A Passport strategy for handling JSON Web Token (JWT) authentication. It is used to authenticate users using JWT tokens.
+
+passport-local: A Passport strategy for handling local username and password authentication. It is used to authenticate users with their username and password.
+
+passport-local-mongoose: A Mongoose plugin that simplifies user authentication using Passport with local strategy. It provides methods to manage user authentication easily.
+
+## Agile Methodologies
+
+Throughout the project, I followed Agile methodologies to ensure efficient project management and collaboration among team members (myself). 
+
+Agile methodologies allowed me to embrace changes in requirements, prioritize tasks, and deliver incremental updates regularly. 
+
+I adopted the following Agile practices:
+
+Sprints: I divided the project into short sprints, typically one to two weeks long, to focus on specific tasks and goals.
+
+Scrum Meetings: Regular stand-up meetings were held to discuss progress, challenges, and plans for the next sprint.
+
+Backlog and User Stories: I maintained a product backlog with user stories to prioritize features and improvements.
+
+Continuous Integration: I used version control and continuous integration tools to automate the build and deployment process.
+
+Test-Driven Development (TDD): I practiced TDD to write tests before implementing new features, ensuring code quality and functionality.
+
+Code Reviews: All code changes were reviewed to maintain code quality and identify potential issues.
+
+Retrospectives: After each sprint, I conducted retrospectives to evaluate the sprint's success and identify areas for improvement.
+
+## Trello Board
+
+### Backend
+
+1. Setup and configuration
+
+![alt text for screen readers](/src/images/Setup_Configuration.png "1")
+
+2. Middleware & Logging
+
+![alt text for screen readers](/src/images/Middleware_Logging.png "2")
+
+3. Database Integration
+
+![alt text for screen readers](/src/images/Database_Integration.png "3")
+
+4. API Endpoints
+
+![alt text for screen readers](/src/images/API_Endpoints.png "4")
+
+5. Authentication & Authorization
+
+![alt text for screen readers](/src/images/Authentication_Authorization.png "5")
+
+6. Deployment
+
+![alt text for screen readers](/src/images/Deployment_Back.png "6")
+
+### Frontend
+
+1. Project Setup
+
+![alt text for screen readers](/src/images/Project_Setup.png "1")
+
+2. Component Design
+
+![alt text for screen readers](/src/images/Component_Design.png "2")
+
+3. API Integration
+
+![alt text for screen readers](/src/images/API_Integration.png "3")
+
+4. User Interface Enhancements
+
+![alt text for screen readers](/src/images/User_Interface_Enhancements.png "4")
+
+5. User Authentication
+
+![alt text for screen readers](/src/images/User_Authentication.png "5")
+
+6. Testing & Debugging
+
+![alt text for screen readers](/src/images/Testing_Debugging.png "6")
+
+7. Deployment
+
+![alt text for screen readers](/src/images/Deployment_Front.png "7")
