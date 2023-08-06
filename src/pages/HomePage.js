@@ -11,9 +11,11 @@ const HomePage = () => {
 
   return (
     <main className="home">
-      <h1>Welcome to PlantSwap</h1>
+      <h1>Welcome to PlantSwap!</h1>
       <p>A platform for plant lovers to connect and swap plants</p>
-      {!isLoggedIn && <Link to="/login-register">Get Started</Link>} {/* Render the link conditionally based on isLoggedIn state */}
+      <img src="/images/Parlour_Palm.png" alt="Parlour Palm" className="parlour-palm-image"/>
+      <br></br>
+      {!isLoggedIn && <Link to="/login-register">Get Started!</Link>} {/* Render the link conditionally based on isLoggedIn state */}
 
       <h2>How It Works</h2>
       <ol>
@@ -22,6 +24,8 @@ const HomePage = () => {
         <li>Request a swap</li>
         <li>Coordinate with the other person</li>
       </ol>
+      
+
     </main>
   );
 };

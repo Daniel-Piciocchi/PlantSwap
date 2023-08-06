@@ -5,7 +5,7 @@ import Footer from './pages/Footer';
 import HomePage from './pages/HomePage';
 import BrowsePlantsPage from './pages/BrowsePlantsPage';
 import MyPlantsPage from './pages/MyPlantsPage';
-import MessagesPage from './pages/MessagesPage'; // Import the MessagesPage
+import MessagesPage from './pages/MessagesPage';
 import LoginRegisterPage from './pages/LoginRegisterPage';
 import { AuthProvider } from './AuthContext';
 

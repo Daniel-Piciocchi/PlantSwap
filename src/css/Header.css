@@ -2,8 +2,7 @@
 .header {
     display: flex;
     justify-content: space-between;
-    /* align-items: center; */
-    padding: 20px 10%; /* Adjust the right padding */
+    padding: 20px 10%;
     background-color: #f0f8ff;
     color: #006400;
     font-family: 'Courier New', Courier, monospace;
@@ -33,14 +32,13 @@
 }
 
 .nav {
-    position: absolute;
-    top: 20px; /* Adjust this value as needed */
-    right: 110px; /* Adjust this value as needed */
+    top: 20px; 
+    right: 110px;
     display: none;
     flex-direction: column;
     align-items: flex-end;
-    background-color: #f0f8ff; /* Add a background color to make the links visible */
-    padding: 10px; /* Add some padding */
+    background-color: #f0f8ff; 
+    padding: 10px;
 }
 
 
@@ -57,6 +55,6 @@
     .nav {
         display: flex;
         flex-direction: row;
-        align-items: center; /* Reset the alignment of the navigation menu for larger screens */
+        align-items: center; 
     }
 }

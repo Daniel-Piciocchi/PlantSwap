@@ -1,7 +1,7 @@
 /* src/css/BrowsePlants.css */
 .browse-plants {
     text-align: center;
-    padding: 50px;
+    padding-bottom: 50px;
     background-color: #f0f8ff;
     color: #006400;
     font-family: 'Courier New', Courier, monospace;
@@ -24,7 +24,6 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin: 20px;
 }
 
 .browse-plants button:hover {
@@ -32,7 +31,6 @@
 }
 
 .browse-plants h2 {
-    margin-top: 100px; /* Increase top margin */
     margin-bottom: 50px;
     font-size: 2em;
 }
@@ -82,3 +80,12 @@
     justify-content: space-evenly;
     margin-top: 10px;
 }
+
+.browse-plants .plant-listing textarea {
+    width: 100%;
+    height: 100px; /* You can adjust the height as per your requirement */
+    resize: vertical;
+    overflow-y: auto;
+    margin-bottom: 10px;
+  }
+  

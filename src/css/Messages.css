@@ -1,6 +1,6 @@
 .plant-swap {
     text-align: center;
-    padding: 50px;
+    padding-bottom: 50px;
     background-color: #f0f8ff;
     color: #006400;
     font-family: 'Courier New', Courier, monospace;
@@ -10,9 +10,6 @@
     font-size: 2.5em;
 }
 
-/* .plant-swap p {
-    font-size: 1.2em;
-} */
 
 .plant-swap button {
     padding: 10px 20px;
@@ -51,7 +48,7 @@
 }
 
 .plant-swap .plant-listing {
-    width: 200px;
+    width: 300px;
     border: 1px solid #006400;
     border-radius: 10px;
     padding: 10px;
@@ -70,34 +67,11 @@
 
 .plant-swap .plant-listing h3, .plant-swap .plant-listing p, .plant-swap .plant-listing .plant-buttons {
     text-align: center;
-    width: 100%;
+    width: 88%;
 }
 
 .plant-swap .plant-listing .plant-buttons {
     display: flex;
     justify-content: space-evenly;
     margin-top: 10px;
-}
-
-/* Added styles for the message modal */
-.message-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 300px;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #006400;
-    border-radius: 10px;
-    z-index: 1000;
-}
-
-.message-modal textarea {
-    width: 100%;
-    height: 100px;
-    margin-top: 10px;
-    border: 1px solid #006400;
-    border-radius: 5px;
-    resize: none;
 }

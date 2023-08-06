@@ -1,26 +1,21 @@
 import React, { useState, useContext } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import '../css/LoginRegister.css'; // Adjusted the path
+import '../css/LoginRegister.css';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
 
 const registrationValidationSchema = Yup.object({
-  username: Yup.string()
-    .required('Required'),
-  email: Yup.string()
-    .email('Invalid email address')
-    .required('Required'),
+  username: Yup.string().required('Required'),
+  email: Yup.string().email('Invalid email address').required('Required'),
   password: Yup.string()
     .min(8, 'Password should be of minimum 8 characters length')
     .required('Required'),
 });
 
 const loginValidationSchema = Yup.object({
-  username: Yup.string()
-    .required('Required'),
-  password: Yup.string()
-    .required('Required'),
+  username: Yup.string().required('Required'),
+  password: Yup.string().required('Required'),
 });
 
 const LoginRegisterPage = () => {
@@ -68,9 +63,9 @@ const LoginRegisterPage = () => {
         credentials: 'include',
       });
       if (response.ok) {
-        const data = await response.json(); // Parse the JSON response
-        console.log('Token:', data.token); // Log the token
-        localStorage.setItem('token', data.token); // Save the token in local storage
+        const data = await response.json();
+        console.log('Token:', data.token);
+        localStorage.setItem('token', data.token);
         console.log('Logged in successfully');
         setIsLoggedIn(true);
         navigate('/browse-plants');
@@ -85,7 +80,7 @@ const LoginRegisterPage = () => {
       ) : (
         <>
           <h1>Create an Account</h1>
-          <form className="register-form" onSubmit={registerFormik.handleSubmit}>
+          <form className="register-form" data-testid="register-form" onSubmit={registerFormik.handleSubmit}>
             <label>
               Username:
               <input
@@ -122,7 +117,7 @@ const LoginRegisterPage = () => {
       )}
 
       <h2>Login</h2>
-      <form className="login-form" onSubmit={loginFormik.handleSubmit}>
+      <form className="login-form" data-testid="login-form" onSubmit={loginFormik.handleSubmit}>
         <label>
           Username:
           <input

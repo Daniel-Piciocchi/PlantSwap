@@ -1,6 +1,6 @@
 .myPlants {
     text-align: center;
-    padding: 50px;
+    padding-bottom: 50px;
     background-color: #f0f8ff;
     color: #006400;
     font-family: 'Courier New', Courier, monospace;
@@ -23,7 +23,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin: 5px 10px;
+    margin: 5px;
 }
 
 .myPlants h2 {
@@ -82,13 +82,12 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    width: 50%; /* Adjust this value as needed */
-    margin: 0 auto; /* Center the form horizontally */
+    width: 50%; 
+    margin: 0 auto; 
 }
 
 .myPlants .add-plant input, .myPlants .add-plant textarea, .myPlants .add-plant button,
 .myPlants .edit-plant input, .myPlants .edit-plant textarea, .myPlants .edit-plant button {
-    /* width: 100%; */
     margin-top: 10px;
 }
 

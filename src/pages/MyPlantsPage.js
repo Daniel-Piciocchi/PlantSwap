@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import request from 'superagent';
+import superagent from 'superagent'; // Importing superagent library
 import '../css/MyPlants.css';
 
 const MyPlantsPage = () => {
@@ -13,7 +13,9 @@ const MyPlantsPage = () => {
     const fetchPlants = async () => {
       try {
         const token = localStorage.getItem('token'); 
-        const response = await request.get('http://localhost:5001/plants/user').set('Authorization', `Bearer ${token}`);
+        const response = await superagent // Use superagent here instead of request
+          .get('http://localhost:5001/plants/user')
+          .set('Authorization', `Bearer ${token}`);
         setPlants(response.body);
       } catch (error) {
         console.error('Error fetching plants:', error);
@@ -24,7 +26,7 @@ const MyPlantsPage = () => {
 
   const handleDelete = async (id) => {
     try {
-      await request.delete(`http://localhost:5001/plants/${id}`);
+      await superagent.delete(`http://localhost:5001/plants/${id}`); // Use superagent here instead of request
       setPlants(plants.filter((plant) => plant._id !== id));
     } catch (error) {
       console.error('Error deleting plant:', error);
@@ -38,9 +40,10 @@ const MyPlantsPage = () => {
       formData.append('image', newPlant.image);
       formData.append('name', newPlant.name);
       formData.append('description', newPlant.description);
-      const response = await request.post('http://localhost:5001/plants')
-                                    .set('Authorization', `Bearer ${token}`)
-                                    .send(formData);
+      const response = await superagent // Use superagent here instead of request
+        .post('http://localhost:5001/plants')
+        .set('Authorization', `Bearer ${token}`)
+        .send(formData);
       setPlants([...plants, response.body]);
       setNewPlant({ name: '', image: '', description: '' });
     } catch (error) {
@@ -69,9 +72,10 @@ const MyPlantsPage = () => {
       formData.append('image', editedPlant.image);
       formData.append('name', editedPlant.name);
       formData.append('description', editedPlant.description);
-      const response = await request.put(`http://localhost:5001/plants/${editedPlant._id}`)
-                                    .set('Authorization', `Bearer ${token}`)
-                                    .send(formData);
+      const response = await superagent // Use superagent here instead of request
+        .put(`http://localhost:5001/plants/${editedPlant._id}`)
+        .set('Authorization', `Bearer ${token}`)
+        .send(formData);
       const updatedPlant = response.body;
       const updatedPlants = plants.map(plant => plant._id === updatedPlant._id ? updatedPlant : plant);
       setPlants(updatedPlants);

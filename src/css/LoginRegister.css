@@ -38,7 +38,6 @@
     box-sizing: border-box;
 }
 
-/* Add this style to center the input boxes */
 .login-register .register-form, .login-register .login-form {
     display: flex;
     flex-direction: column;
