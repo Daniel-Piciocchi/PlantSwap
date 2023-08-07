@@ -12,7 +12,7 @@ const app = express();
 
 // Enable Cross-Origin Resource Sharing (CORS) for the React app running on http://localhost:3000
 // Allow credentials to be included in requests
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+app.use(cors({ origin: 'https://plantswap-6dabb95ad1f6.herokuapp.com', credentials: true }));
 
 // Parse incoming JSON data
 app.use(express.json());
