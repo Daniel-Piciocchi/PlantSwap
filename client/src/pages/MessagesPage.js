@@ -61,7 +61,9 @@ const MessagesPage = () => {
       // Open the email client to allow the user to send a response
       const email = message.requester?.email || '';
       const subject = 'Swap Request Response';
-      window.location.href = `mailto:${email}?subject=${subject}`;
+      const body = 'Hi, thanks for requesting a swap! Please send me a photo of what plant you would like to trade!';
+      const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailtoLink;
 
     } catch (error) {
       console.error('Error updating message status:', error);
