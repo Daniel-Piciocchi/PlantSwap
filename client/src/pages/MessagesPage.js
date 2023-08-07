@@ -22,7 +22,7 @@ const MessagesPage = () => {
 
       try {
         // Make a GET request to fetch messages for the current user
-        const response = await axios.get(`http://localhost:5001/swaps/${userId}`, {
+        const response = await axios.get(`https://plantswap-6dabb95ad1f6.herokuapp.com/swaps/${userId}`, {
           headers: {
             'Authorization': `Bearer ${token}`  // Pass the token in headers for authentication
           }
@@ -43,7 +43,7 @@ const MessagesPage = () => {
     try {
       const token = localStorage.getItem('token');
       // Make a PUT request to update the status of the message to "Pending"
-      await axios.put(`http://localhost:5001/swaps/${message._id}`, { status: 'Pending' }, {
+      await axios.put(`https://plantswap-6dabb95ad1f6.herokuapp.com/swaps/${message._id}`, { status: 'Pending' }, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -76,7 +76,7 @@ const MessagesPage = () => {
     try {
       const token = localStorage.getItem('token');
       // Make a DELETE request to remove the message from the server
-      await axios.delete(`http://localhost:5001/swaps/${messageId}`, {
+      await axios.delete(`https://plantswap-6dabb95ad1f6.herokuapp.com/swaps/${messageId}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
