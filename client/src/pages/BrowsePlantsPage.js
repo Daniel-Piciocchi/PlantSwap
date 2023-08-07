@@ -6,7 +6,7 @@ import '../css/BrowsePlants.css'; // Importing CSS for this component
 // Component for browsing plant listings
 const BrowsePlantsPage = () => {
   // State for holding plant data
-  const [plants, setPlants] = useState([]);
+  const [plants, setPlants] = useState(null); // Initialize with null to indicate initial empty state
   
   // State for holding messages corresponding to each plant
   const [messages, setMessages] = useState({});
@@ -17,9 +17,13 @@ const BrowsePlantsPage = () => {
   // Effect hook to fetch plant data when the component mounts
   useEffect(() => {
     const fetchPlants = async () => {
-      // Making a GET request to fetch plants
-      const response = await request.get('http://plantswap-6dabb95ad1f6.herokuapp.com/plants');
-      setPlants(response.body); // Updating the plants state
+      try {
+        // Making a GET request to fetch plants
+        const response = await request.get('http://localhost:5001/plants');
+        setPlants(response.body); // Updating the plants state
+      } catch (error) {
+        console.error('Error fetching plants:', error);
+      }
     };
     
     fetchPlants(); // Initiating the fetch
@@ -50,22 +54,28 @@ const BrowsePlantsPage = () => {
     <main className="browse-plants">
       <h1>Browse Plants</h1>
       <h2>Plant Listings</h2>
-      <div className="plant-grid">
-        {/* Looping through the plants to render their data */}
-        {plants.map((plant) => (
-          <div className="plant-listing" key={plant._id}>
-            <img src={`http://plantswap-6dabb95ad1f6.herokuapp.com/uploads/${plant.image}`} alt={plant.name} />
-            <h3>{plant.name}</h3>
-            <p>{plant.description}</p>
-            <textarea
-              placeholder="Enter your message here"
-              value={messages[plant._id] || ''}
-              onChange={(e) => handleMessageChange(plant._id, e.target.value)}
-            />
-            <button className="request-swap-button" onClick={() => handleRequestSwap(plant._id)}>Request Swap</button>
-          </div>
-        ))}
-      </div>
+      {plants === null ? (
+        <p>Loading...</p> // Display a loading message while fetching data
+      ) : plants.length === 0 ? (
+        <p>No plants found.</p> // Display a message when no plants are available
+      ) : (
+        <div className="plant-grid">
+          {/* Looping through the plants to render their data */}
+          {plants.map((plant) => (
+            <div className="plant-listing" key={plant._id}>
+              <img src={`http://localhost:5001/uploads/${plant.image}`} alt={plant.name} />
+              <h3>{plant.name}</h3>
+              <p>{plant.description}</p>
+              <textarea
+                placeholder="Enter your message here"
+                value={messages[plant._id] || ''}
+                onChange={(e) => handleMessageChange(plant._id, e.target.value)}
+              />
+              <button className="request-swap-button" onClick={() => handleRequestSwap(plant._id)}>Request Swap</button>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Conditionally render the popup if the state is true */}
       {showPopup && (
